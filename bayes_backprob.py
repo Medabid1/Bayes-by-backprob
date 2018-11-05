@@ -108,17 +108,14 @@ class BBB:
     def _get_params(self, prefix, shape):
         if prefix == "weights":
             n = shape[0]
-            mus = tf.get_variable(
-                prefix+"_mu", shape, dtype=tf.float32, 
-                initializer=tf.truncated_normal_initializer(stddev=1/np.sqrt(n)))
-            rhos = tf.get_variable(
-                prefix+"_rho", shape, dtype=tf.float32, 
-                initializer=tf.constant_initializer(np.log(np.exp(1/np.sqrt(n)) - 1)))
+            mus = tf.get_variable(prefix+"_mu", shape, dtype=tf.float32, 
+                                  initializer=tf.truncated_normal_initializer(stddev=1/np.sqrt(n)))
+            rhos = tf.get_variable(prefix + "_rho", shape, dtype=tf.float32, 
+                                    initializer=tf.constant_initializer(np.log(np.exp(1/np.sqrt(n)) - 1)))
             return mus, rhos
         elif prefix == "biases":
-            biases = tf.get_variable(
-                prefix, shape, dtype=tf.float32, 
-                initializer=tf.constant_initializer(0.01))
+            biases = tf.get_variable(prefix, shape, dtype=tf.float32, 
+                                    initializer=tf.constant_initializer(0.01))
             return biases
     
     def _get_weights(self, mus, rhos=None):
@@ -177,7 +174,7 @@ class BBB:
 
     def _loss_ER(self, y):
         cross_entropy = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(
-            logits=y, labels=self._target_onehot))
+                                        logits=y, labels=self._target_onehot))
         return cross_entropy
     
     def _loss_KL(self):
@@ -213,12 +210,11 @@ class BBB:
     
     @lazy_property
     def learning_rate(self):
-        self._learning_rate = tf.train.exponential_decay(
-            self._conf.learning_rate_base,
-            self.global_step,
-            self._conf.example_size / self._conf.batch_size, 
-            self._conf.learning_rate_decay,
-            staircase=True)
+        self._learning_rate = tf.train.exponential_decay(self._conf.learning_rate_base,
+                                                        self.global_step,
+                                                        self._conf.example_size / self._conf.batch_size, 
+                                                        self._conf.learning_rate_decay,
+                                                        staircase=True)
         return self._learning_rate
 
      
