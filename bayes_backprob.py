@@ -1,9 +1,4 @@
 
-"""
-Created on Mon Mar 12 10:33:55 2018
-
-@author: mohamed
-"""
 import numpy as np
 import tensorflow as tf
 import functools
@@ -181,7 +176,7 @@ class BBB:
         return tf.reduce_sum(logqs)
 
     def _loss_ER(self, y):
-        cross_entropy = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(
+        cross_entropy = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(
             logits=y, labels=self._target_onehot))
         return cross_entropy
     
