@@ -1,2 +1,1 @@
-Implementation for Bayes by Backprob algorithm, introduced in this paper "Weight Uncertainty in Neural Networks" (https://arxiv.org/abs/1505.05424).
-by Charles Blundell, Julien Cornebise, Koray Kavukcuoglu, Daan Wierstra.
+Tensorflow implementation of Bayes by Backprob algorithm, introduced in "Weight Uncertainty in Neural Networks" (https://arxiv.org/abs/1505.05424), by Charles Blundell, Julien Cornebise, Koray Kavukcuoglu, Daan Wierstra.
